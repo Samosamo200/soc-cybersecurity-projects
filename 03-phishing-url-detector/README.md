@@ -1,60 +1,56 @@
-# 03 - Phishing URL Detector
+# 03 – Phishing URL Detector
 
-A machine learning classifier that detects phishing URLs using a Random Forest model trained on URL-based features.
+A machine learning tool that classifies URLs as **phishing** or **legitimate** using a Random Forest classifier trained on URL-based features.
 
-## Features
+## Features extracted
 
-- Extracts 14 features from URLs (length, special characters, IP presence, suspicious keywords, etc.)
-- Trained with a Random Forest classifier (100 estimators)
-- Supports demo mode with synthetic training data
-- Can classify any URL from the command line
+- URL length and entropy
+- Number of subdomains
+- IP address in hostname
+- Presence of `@` or double slashes
+- HTTPS usage
+- Path depth and query parameters
+- Brand keywords in subdomain or path
+- Suspicious TLDs (`.tk`, `.ml`, `.xyz`, etc.)
 
 ## Requirements
 
 ```
-scikit-learn
-numpy
-```
-
-Install with:
-```bash
-pip install scikit-learn numpy
+pip install scikit-learn pandas numpy
 ```
 
 ## Usage
 
-### Demo mode (synthetic data)
 ```bash
+# Run demo with synthetic data
 python detector.py --demo
+
+# Classify a single URL
+python detector.py --url "http://paypal-secure.tk/login"
+
+# Classify URLs from a file
+python detector.py --file urls.txt
 ```
 
-### Classify a specific URL
-```bash
-python detector.py --url "http://secure-bank-login.xyz/verify?user=victim"
-```
-
-## How It Works
-
-1. Extracts features from the URL: length, number of dots, dashes, special chars, presence of IP address, HTTPS usage, suspicious keywords, etc.
-2. Feeds features into a Random Forest classifier
-3. Returns a prediction (LEGITIMATE or PHISHING) with confidence score
-
-## Example Output
+## Demo output
 
 ```
-=== Phishing URL Detector - Demo Mode ===
-Training on 420 URLs...
+Generating synthetic demo data...
+Dataset: 500 samples, 250 phishing, 250 legitimate
+
+Training Random Forest classifier...
               precision    recall  f1-score   support
-
-  Legitimate       0.98      0.97      0.97        60
-    Phishing       0.96      0.97      0.97        24
-
-    accuracy                           0.97        84
-
-Predictions on sample URLs:
-URL: https://www.google.com/search?q=phishing
-Prediction: LEGITIMATE (97.0% confidence)
-
-URL: http://secure-bank-login.xyz/account/verify?user=victim
-Prediction: PHISHING (95.0% confidence)
+   Legitimate       0.95      0.96      0.95        52
+     Phishing       0.96      0.94      0.95        48
+    
+http://paypal-secure.tk/login?confirm=true
+  Result: PHISHING (97.0% confidence)
+https://www.google.com/search?q=cybersecurity
+  Result: LEGITIMATE (98.0% confidence)
 ```
+
+## Notes
+
+- The `--demo` flag uses synthetically generated URLs for testing without real data
+- For production use, train on a labeled dataset such as [PhishTank](https://phishtank.org/) or [OpenPhish](https://openphish.com/)
+- Model is retrained on each run; add `joblib` persistence for production deployments
