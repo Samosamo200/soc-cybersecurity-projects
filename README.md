@@ -8,7 +8,7 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Aktiv-00C853?style=for-the-badge)
 ![Student](https://img.shields.io/badge/Niv%C3%A5-2.%20%C3%85r-blueviolet?style=for-the-badge)
-![Projects](https://img.shields.io/badge/Prosjekter-3%2F20-orange?style=for-the-badge)
+![Projects](https://img.shields.io/badge/Prosjekter-4%2F20-orange?style=for-the-badge)
 
 <br/>
 
@@ -35,7 +35,7 @@ Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Cen
 | 01 | [port-scanner](./01-port-scanner) | 🔍 SOC | TCP Socket Scanning | ✅ Ferdig |
 | 02 | [network-anomaly-detector](./02-network-anomaly-detector) | 🤖 ML | Isolation Forest | ✅ Ferdig |
 | 03 | [phishing-url-detector](./03-phishing-url-detector) | 🤖 ML | Random Forest | ✅ Ferdig |
-| 04 | log-analyzer | 🔍 SOC | Regex + Parsing | 🔜 Kommer |
+| 04 | [log-analyzer](./04-log-analyzer) | 🔍 SOC | Regex + Parsing | ✅ Ferdig |
 | 05 | brute-force-detector | 🤖 ML | Logistisk Regresjon | 🔜 Kommer |
 | 06 | dns-exfiltration-detector | 🤖 ML | Anomali-deteksjon | 🔜 Kommer |
 | 07 | malware-classifier | 🤖 ML | Decision Tree | 🔜 Kommer |
