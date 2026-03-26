@@ -1,86 +1,63 @@
-# DNS Exfiltration Detector
+# 06 - DNS Exfiltration Detector
 
-An anomaly-based machine learning detector that identifies DNS exfiltration attempts by analysing per-query features such as subdomain entropy, query length, and request frequency.
+Detects DNS-based data exfiltration using anomaly detection with Isolation Forest. Analyses DNS query features such as entropy, length, and character composition to flag suspicious queries that may indicate covert data tunnelling.
 
-## How it works
+## How It Works
 
-DNS exfiltration encodes data in DNS queries (e.g. `aGVsbG8...base64...evil.com`).  
-Key signals exploited by the model:
+DNS exfiltration encodes data into DNS query subdomains to bypass firewalls. This tool extracts statistical features from DNS queries and uses an unsupervised Isolation Forest model to identify anomalous patterns typical of exfiltration.
 
-| Feature | Why it matters |
-|---------|----------------|
-| Subdomain entropy | Encoded payloads have high Shannon entropy |
-| Query length | Exfil queries are typically much longer than normal |
-| Subdomain length | Same reasoning as total length |
-| Unique char ratio | High ratio → random/encoded content |
-| Digit ratio | Base64/hex payloads contain more digits |
-
-An **Isolation Forest** (unsupervised) marks queries that deviate strongly from the normal baseline as anomalies.
+**Features extracted:**
+- Query length
+- Subdomain depth (dot count)
+- Shannon entropy of the query string
+- Digit-to-character ratio
+- Unique character ratio
 
 ## Requirements
 
 ```
-scikit-learn
-pandas
-numpy
-```
-
-Install with:
-
-```bash
 pip install scikit-learn pandas numpy
 ```
 
 ## Usage
 
-### Demo mode (synthetic data, no real DNS log needed)
-
 ```bash
+# Run with synthetic demo data
 python detector.py --demo
+
+# Run on your own CSV (must have a "query" column)
+python detector.py --input dns_logs.csv
 ```
 
-### Analyse a real DNS log
-
-The log file should be a CSV (or whitespace-separated) with at minimum a column containing the queried domain name.
-
-```bash
-python detector.py --file dns.log --domain-col qname
-```
-
-### Options
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--file` | — | Path to DNS log file |
-| `--domain-col` | `domain` | Column name that holds the domain string |
-| `--contamination` | `0.05` | Expected fraction of anomalies (0–0.5) |
-| `--demo` | — | Run with synthetic data |
-| `--output` | — | Save flagged rows to this CSV path |
-
-## Example output
+## Demo Output Example
 
 ```
-[*] Loaded 10000 queries
-[*] Extracted features
-[*] Training Isolation Forest  (contamination=0.05)
-[*] Detection complete
+[Demo] Loaded 220 DNS queries ({'normal': 200, 'exfiltration': 20})
 
-=== Flagged as potential DNS exfiltration ===
-                                  domain  entropy  query_len  ...  prediction
-2847  aGVsbG8td29ybGQ.exfil.example.com     4.81        34   ...  ANOMALY
-...
-[+] 500 anomalous queries detected out of 10000
+Detected 11 suspicious DNS queries out of 220 total
+
+Top flagged queries:
+                                               query  anomaly_score
+  a3b9f2e1c8d7g4h5j6k0m1n2p3q4r5s6t7u8v9w0x1y2z3.evil.io        -0.21
+  ...
+
+[Demo Stats] TP=10, FP=1, FN=10
+Precision: 0.91  Recall: 0.50
 ```
 
-## Project structure
+## Input Format
 
+CSV file with at minimum a `query` column containing fully qualified domain names:
+
+```csv
+query
+www.google.com
+update.microsoft.com
+aGVsbG8gd29ybGQ.malicious.xyz
 ```
-06-dns-exfiltration-detector/
-├── detector.py
-└── README.md
-```
 
-## Notes
+## Limitations
 
-- Tuned for demo purposes; retrain on your own baseline traffic for production use.
-- Works entirely offline – no external API calls.
+- Unsupervised model — no labelled training data required, but tuning `contamination` may be needed
+- High-entropy legitimate domains (CDNs, hashed URLs) may cause false positives
+- Does not inspect DNS response payloads, only query strings
