@@ -8,7 +8,7 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Aktiv-00C853?style=for-the-badge)
 ![Student](https://img.shields.io/badge/Niv%C3%A5-2.%20%C3%85r-blueviolet?style=for-the-badge)
-![Projects](https://img.shields.io/badge/Prosjekter-6%2F20-orange?style=for-the-badge)
+![Projects](https://img.shields.io/badge/Prosjekter-7%2F20-orange?style=for-the-badge)
 
 <br/>
 
@@ -38,7 +38,7 @@ Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Cen
 | 04 | [log-analyzer](./04-log-analyzer) | 🔍 SOC | Regex + Parsing | ✅ Ferdig |
 | 05 | [brute-force-detector](./05-brute-force-detector) | 🤖 ML | Logistisk Regresjon | ✅ Ferdig |
 | 06 | [dns-exfiltration-detector](./06-dns-exfiltration-detector) | 🤖 ML | Isolation Forest | ✅ Ferdig |
-| 07 | malware-classifier | 🤖 ML | Decision Tree | 🔜 Kommer |
+| 07 | [malware-classifier](./07-malware-classifier) | 🤖 ML | Random Forest | ✅ Ferdig |
 | 08 | ssh-honeypot | 🔍 SOC | Socket Server | 🔜 Kommer |
 | 09 | siem-log-parser | 🔍 SOC | Log Parsing | 🔜 Kommer |
 | 10 | user-behavior-analytics | 🤖 ML | K-Means Clustering | 🔜 Kommer |
