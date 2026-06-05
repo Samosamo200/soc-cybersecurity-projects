@@ -96,3 +96,4 @@ python3 scanner.py 192.168.1.1
 ![](https://komarev.com/ghpvc/?username=Samosamo200&color=00ff41&style=flat-square&label=REPO+VIEWS)
 
 </div>
+| [07-malware-classifier](./07-malware-classifier/) | ML | Klassifiser filer som malware via PE-features + Random Forest |
