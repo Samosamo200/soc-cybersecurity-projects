@@ -55,6 +55,8 @@ python3 scanner.py 127.0.0.1 --ports 1-1000
 
 ## 📊 Eksempel på output
 
+![Demo – skanning av 127.0.0.1 på Kali Linux](screenshots/demo.png)
+
 ```
 Skanner 192.168.1.1 (1-1024)...
   22/tcp   open     ← SSH (fjerninnlogging)
