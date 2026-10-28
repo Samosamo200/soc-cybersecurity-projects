@@ -8,7 +8,7 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Aktiv-00C853?style=for-the-badge)
 ![Student](https://img.shields.io/badge/Niv%C3%A5-2.%20%C3%85r-blueviolet?style=for-the-badge)
-![Projects](https://img.shields.io/badge/Prosjekter-7%2F20-orange?style=for-the-badge)
+![Projects](https://img.shields.io/badge/Prosjekter-6%2F20-orange?style=for-the-badge)
 
 <br/>
 
@@ -23,7 +23,7 @@
 
 Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Centers (SOC)** — teamene som overvåker og forsvarer nettverk mot angrep. Prosjektene dekker to hovedområder:
 
-- 🔍 **SOC-verktøy** — praktiske scripts for nettverksskanning, logganalyse og trusseldeteksjon
+- 🔍 **SOC-verktøy** — praktiske scripts for logganalyse og trusseldeteksjon
 - 🤖 **Machine Learning** — algoritmer som lærer å oppdage angrep og anomalier automatisk
 
 ---
@@ -32,7 +32,6 @@ Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Cen
 
 | # | Prosjekt | Kategori | Algoritme / Teknikk | Status |
 |---|----------|----------|---------------------|--------|
-| 01 | [port-scanner](./01-port-scanner) | 🔍 SOC | TCP Socket Scanning | ✅ Ferdig |
 | 02 | [network-anomaly-detector](./02-network-anomaly-detector) | 🤖 ML | Isolation Forest | ✅ Ferdig |
 | 03 | [phishing-url-detector](./03-phishing-url-detector) | 🤖 ML | Random Forest | ✅ Ferdig |
 | 04 | [log-analyzer](./04-log-analyzer) | 🔍 SOC | Regex + Parsing | ✅ Ferdig |
@@ -49,7 +48,6 @@ Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Cen
 ## 🧠 Konsepter du lærer
 
 ```
-Nettverksskanning       →  Forstå hvilke tjenester som er eksponert
 Anomali-deteksjon       →  Finn unormal trafikk uten kjente signaturer
 Logganalyse             →  Les og forstå hva som skjer i et system
 Trusselintelligens      →  Kjente skadelige IP-er, domener og hashes
@@ -69,8 +67,8 @@ cd soc-cybersecurity-projects
 pip install scikit-learn pandas numpy scapy
 
 # Kjør et prosjekt
-cd 01-port-scanner
-python3 scanner.py 192.168.1.1
+cd 02-network-anomaly-detector
+python3 anomaly_detector.py --demo
 ```
 
 ---
