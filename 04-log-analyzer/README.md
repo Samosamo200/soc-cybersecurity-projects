@@ -39,6 +39,8 @@ The tool prints a summary to the console and optionally saves results to CSV or 
 
 ## Example Output
 
+![Demo – python3 --demo](screenshots/demo.png)
+
 ```
 === Log Analysis Summary ===
 Total lines parsed : 1500

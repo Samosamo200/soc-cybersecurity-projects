@@ -31,6 +31,8 @@ python detector.py --input dns_logs.csv
 
 ## Demo Output Example
 
+![Demo – python3 --demo](screenshots/demo.png)
+
 ```
 [Demo] Loaded 220 DNS queries ({'normal': 200, 'exfiltration': 20})
 

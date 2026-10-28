@@ -34,6 +34,8 @@ python detector.py --file urls.txt
 
 ## Demo output
 
+![Demo – python3 --demo](screenshots/demo.png)
+
 ```
 Generating synthetic demo data...
 Dataset: 500 samples, 250 phishing, 250 legitimate

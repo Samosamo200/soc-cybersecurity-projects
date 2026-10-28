@@ -99,6 +99,8 @@ bytes_sent,bytes_recv,duration,port,packets
 
 ## 📊 Eksempel på output
 
+![Demo – python3 --demo](screenshots/demo.png)
+
 ```
 Totalt: 520 rader | Anomalier: 22
 
