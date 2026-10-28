@@ -41,6 +41,8 @@ pip install scikit-learn pandas numpy
 
 ## Example Output (--demo)
 
+![Demo – python3 --demo](screenshots/demo.png)
+
 ```
 Generating synthetic training data...
 

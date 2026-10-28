@@ -89,7 +89,7 @@ def train_model(X, y):
     return clf
 
 def predict_url(clf, url):
-    features = np.array(extract_features(url)).reshape(1, -1)
+    features = pd.DataFrame([extract_features(url)], columns=FEATURE_NAMES)
     pred = clf.predict(features)[0]
     prob = clf.predict_proba(features)[0]
     label = 'PHISHING' if pred == 1 else 'LEGITIMATE'
