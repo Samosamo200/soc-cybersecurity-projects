@@ -8,7 +8,7 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Aktiv-00C853?style=for-the-badge)
 ![Student](https://img.shields.io/badge/Niv%C3%A5-2.%20%C3%85r-blueviolet?style=for-the-badge)
-![Projects](https://img.shields.io/badge/Prosjekter-8%2F20-orange?style=for-the-badge)
+![Projects](https://img.shields.io/badge/Prosjekter-9%2F20-orange?style=for-the-badge)
 
 <br/>
 
@@ -40,9 +40,10 @@ Dette repoet inneholder verktøy og algoritmer brukt i **Security Operations Cen
 | 06 | [dns-exfiltration-detector](./06-dns-exfiltration-detector) | 🤖 ML | Isolation Forest | ✅ Ferdig |
 | 07 | [malware-classifier](./07-malware-classifier) | 🤖 ML | Random Forest | ✅ Ferdig |
 | 08 | [azure-sentinel-soc-lab](./08-azure-sentinel-soc-lab) | 🔍 SOC | Microsoft Sentinel + KQL | ✅ Ferdig |
-| 09 | ssh-honeypot | 🔍 SOC | Socket Server | 🔜 Kommer |
-| 10 | siem-log-parser | 🔍 SOC | Log Parsing | 🔜 Kommer |
-| 11 | user-behavior-analytics | 🤖 ML | K-Means Clustering | 🔜 Kommer |
+| 09 | [ai-security-red-vs-blue](./09-ai-security-red-vs-blue) | 🔍 SOC + 🤖 AI | Prompt injection, Prompt Shields, Sentinel | ✅ Ferdig |
+| 10 | ssh-honeypot | 🔍 SOC | Socket Server | 🔜 Kommer |
+| 11 | siem-log-parser | 🔍 SOC | Log Parsing | 🔜 Kommer |
+| 12 | user-behavior-analytics | 🤖 ML | K-Means Clustering | 🔜 Kommer |
 | ... | ... | ... | ... | 🔜 Kommer |
 
 ---
@@ -87,6 +88,7 @@ python3 scanner.py 192.168.1.1
 ![Scapy](https://img.shields.io/badge/-Scapy-black?style=flat-square&logo=python)
 ![Microsoft Sentinel](https://img.shields.io/badge/-Microsoft%20Sentinel-black?style=flat-square&logo=microsoftazure)
 ![KQL](https://img.shields.io/badge/-KQL-black?style=flat-square&logo=microsoftazure)
+![Azure OpenAI](https://img.shields.io/badge/-Azure%20OpenAI-black?style=flat-square&logo=openai)
 
 </div>
 

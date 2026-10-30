@@ -12,6 +12,8 @@ flowchart LR
     R --> I["🚨 Incidents"]
 ```
 
+![Phishing answer](screenshots/phishing-answer.png)
+
 **Key results**
 
 - Attack success rate: **7 % → 0 %** (42 attempts per run)
@@ -53,6 +55,11 @@ Fake secrets are planted where the assistant must never reveal them. Every answe
 Every interaction is logged as JSON to `logs/interactions.jsonl` (question, retrieved documents, answer, blocked by guardrails, leaks). These logs are later shipped to Microsoft Sentinel.
 
 ## Red Team
+
+In baseline mode, a salary question sends the confidential document to the model. The model refuses, but nothing else stops the leak:
+
+![Baseline chat](screenshots/baseline-chat.png)
+
 
 `run_redteam.py` runs 14 attacks from `redteam/attacks.py`, each several times since LLM output is not deterministic. An attack succeeds if the answer contains a canary token or the phishing marker.
 
@@ -124,6 +131,8 @@ Every defense that fires is logged in `defenses_triggered`, so it can be detecte
 - The output filter was never triggered in these runs. It remains the last line of defense if both earlier layers fail.
 - 0/42 means no attack in this test set succeeded. It does not mean the assistant cannot be attacked; a larger and more varied attack set is the natural next step.
 
+![Before and after](screenshots/before-after.png)
+
 ## Detection in Microsoft Sentinel
 
 The assistant's logs are shipped to Microsoft Sentinel, the same way endpoint logs are collected with an agent and a Data Collection Rule.
@@ -153,6 +162,10 @@ Both rules map the user as an **Account** entity, and the phishing rule also map
 | #2 Prompt injection detected | Medium | 9 attempts in hardened mode, all stopped by Prompt Shields | Informational, expected activity – Security testing |
 
 Both incidents were assigned, investigated, documented and resolved. Since all activity came from an authorized red team test, they were classified as expected activity rather than true positives.
+
+![Sentinel incident](screenshots/sentinel-incident.png)
+
+![Incidents](screenshots/incidents.png)
 
 > Microsoft Sentinel is moving into the Microsoft Defender portal. The workspace was connected to Defender, where the analytics rules and incidents are managed.
 
