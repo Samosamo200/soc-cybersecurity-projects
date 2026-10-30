@@ -8,8 +8,8 @@ Securing an LLM application in Azure. A deliberately vulnerable HR chatbot built
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Build the target: vulnerable RAG chatbot | ✅ Code ready |
-| 2 | 🔴 Red team: prompt injection, jailbreaks, data exfiltration (OWASP LLM Top 10, MITRE ATLAS) | 🔜 |
+| 1 | Build the target: vulnerable RAG chatbot | ✅ Done |
+| 2 | 🔴 Red team: prompt injection, jailbreaks, data exfiltration (OWASP LLM Top 10, MITRE ATLAS) | 🚧 Code ready |
 | 3 | 🔵 Blue team: Prompt Shields, spotlighting, access control, output filtering | 🔜 |
 | 4 | 🟣 Detection: logs to Microsoft Sentinel, KQL rules, incidents | 🔜 |
 | 5 | Results: attack success rate before vs after | 🔜 |
@@ -37,6 +37,22 @@ Fake secrets are planted where the assistant must never reveal them. Every answe
 
 Every interaction is logged as JSON to `logs/interactions.jsonl` (question, retrieved documents, answer, blocked by guardrails, leaks). These logs are later shipped to Microsoft Sentinel.
 
+## Red Team
+
+`run_redteam.py` runs 14 attacks from `redteam/attacks.py`, each several times since LLM output is not deterministic. An attack succeeds if the answer contains a canary token or the phishing marker.
+
+| Category | Attacks | OWASP | MITRE ATLAS |
+|----------|---------|-------|-------------|
+| Direct prompt injection | 3 | LLM01, LLM07 | AML.T0051.000 |
+| System prompt extraction | 3 | LLM07 | AML.T0056 |
+| Jailbreak / roleplay | 3 | LLM01, LLM02 | AML.T0054 |
+| Data exfiltration | 3 | LLM02 | AML.T0057 |
+| Indirect prompt injection (poisoned document) | 2 | LLM01 | AML.T0051.001 |
+
+Indirect attacks plant a poisoned document in the document store and then ask a harmless employee question. One tries to leak the canaries, the other makes the assistant send users to a fake login page.
+
+Results are saved to `results/` as JSON, and every attack is also logged to `logs/interactions.jsonl` with `"user": "redteam"`.
+
 ## Security by Design
 
 - **No API keys.** The app authenticates with Microsoft Entra ID (`DefaultAzureCredential`) and the *Cognitive Services OpenAI User* role.
@@ -53,7 +69,8 @@ python -m venv .venv
 pip install -r requirements.txt
 copy .env.example .env      # then set AZURE_OPENAI_ENDPOINT in .env
 az login
-python chat.py
+python chat.py          # chat with the assistant
+python run_redteam.py    # run the attacks
 ```
 
 ## Tech
