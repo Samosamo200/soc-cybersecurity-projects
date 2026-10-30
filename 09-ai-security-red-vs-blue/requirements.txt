@@ -2,3 +2,4 @@ openai>=1.108
 azure-identity>=1.19
 python-dotenv>=1.0
 requests>=2.31
+azure-monitor-ingestion>=1.0

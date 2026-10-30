@@ -11,7 +11,7 @@ Securing an LLM application in Azure. A deliberately vulnerable HR chatbot built
 | 1 | Build the target: vulnerable RAG chatbot | ✅ Done |
 | 2 | 🔴 Red team: prompt injection, jailbreaks, data exfiltration (OWASP LLM Top 10, MITRE ATLAS) | ✅ Baseline: 7 % ASR |
 | 3 | 🔵 Blue team: Prompt Shields, spotlighting, output filtering | ✅ Hardened: 0 % ASR |
-| 4 | 🟣 Detection: logs to Microsoft Sentinel, KQL rules, incidents | 🔜 |
+| 4 | 🟣 Detection: logs to Microsoft Sentinel, KQL rules, incidents | 🚧 Code ready |
 | 5 | Results: attack success rate before vs after | 🔜 |
 
 ## The Target
