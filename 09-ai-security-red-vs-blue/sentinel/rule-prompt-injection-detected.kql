@@ -1,0 +1,15 @@
+// Analytics rule: AI assistant – prompt injection detected
+// Severity: Medium | MITRE ATLAS: AML.T0051 LLM Prompt Injection
+// Fires when any defense layer in the hardened assistant reacts to an attack.
+// Entity mapping: Account -> UserName
+AIAssistant_CL
+| where array_length(DefensesTriggered) > 0
+| mv-expand Defense = DefensesTriggered to typeof(string)
+| extend Layer = tostring(split(Defense, ":")[0])
+| summarize
+    Detections = count(),
+    Layers = make_set(Layer),
+    Questions = make_set(Question, 5),
+    FirstSeen = min(TimeGenerated),
+    LastSeen = max(TimeGenerated)
+    by UserName

@@ -1,0 +1,18 @@
+// Analytics rule: AI assistant – untrusted link in answer (possible phishing)
+// Severity: High | MITRE ATLAS: AML.T0051.001 Indirect Prompt Injection
+// Fires when an answer that reached the user contains a link outside the company domain.
+// This catches a successful injection even when no defense blocked it.
+// Entity mapping: Account -> UserName, URL -> Url
+AIAssistant_CL
+| where Blocked == false
+| extend Urls = extract_all(@"(https?://[^\s)\]>]+)", Answer)
+| mv-expand Url = Urls to typeof(string)
+| extend Url = trim_end(@"[.,;:!?]+", Url)
+| extend Host = tostring(parse_url(Url).Host)
+| where isnotempty(Host) and not(Host == "nordlys.no" or Host endswith ".nordlys.no")
+| summarize
+    Hits = count(),
+    Questions = make_set(Question, 5),
+    FirstSeen = min(TimeGenerated),
+    LastSeen = max(TimeGenerated)
+    by UserName, Mode, Url, Host
